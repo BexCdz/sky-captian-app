@@ -1,0 +1,81 @@
+.button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  padding: 16px 32px;
+  border: 6px solid var(--ink);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font: inherit;
+  font-size: 2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-press);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 rgba(18, 35, 74, 0.35);
+}
+
+.button:focus-visible {
+  outline: 6px solid var(--white);
+  outline-offset: 4px;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.sun { background: var(--sun); }
+.grass { background: var(--grass); }
+.coral { background: var(--coral); }
+.grape { background: var(--grape); color: var(--white); }
+.sky { background: var(--sky); }
+.pink { background: var(--pink); }
+
+.compact {
+  min-height: var(--tap-min);
+  padding: 6px 18px;
+  font-size: 1.4rem;
+}
+
+.compact .emoji {
+  font-size: 3rem;
+}
+
+.tile {
+  width: 100%;
+  min-height: 150px;
+  padding: 12px;
+  font-size: clamp(1.4rem, 4vmin, 2.2rem);
+}
+
+.tile .emoji {
+  font-size: clamp(3.5rem, 11vmin, 5.5rem);
+}
+
+.number {
+  min-width: 140px;
+  min-height: 140px;
+  font-size: 4.5rem;
+}
+
+@media (max-height: 520px) {
+  .compact { min-height: 76px; padding: 4px 14px; }
+  .compact .emoji { font-size: 2.4rem; }
+  .tile { min-height: 96px; }
+  .tile .emoji { font-size: 3rem; }
+  .number { min-width: 100px; min-height: 96px; font-size: 3rem; }
+}

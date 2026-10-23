@@ -1,0 +1,49 @@
+.canvasWrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: min(100%, 1100px);
+  border: 6px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--white);
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.brush {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.brushOn {
+  background: var(--sun);
+  transform: scale(1.1);
+}
+
+.dot {
+  display: block;
+  border-radius: 50%;
+  background: var(--ink);
+}

@@ -1,0 +1,46 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vmin;
+  --cell: min(26vmin, 170px);
+}
+
+@media (max-height: 520px) {
+  .layout {
+    flex-direction: row;
+    gap: 5vmin;
+    --cell: calc((100vh - 120px) / 3);
+  }
+}
+
+.turn {
+  font-size: clamp(2.5rem, 9vmin, 4.5rem);
+  line-height: 1;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell));
+  gap: 1.5vmin;
+}
+
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  padding: 0;
+  border: 6px solid var(--ink);
+  border-radius: 24px;
+  background: var(--white);
+  font-size: calc(var(--cell) * 0.6);
+  cursor: pointer;
+  box-shadow: var(--shadow-press);
+}
+
+.cell:disabled {
+  cursor: default;
+}
+
+.line {
+  background: #c9f7dc;
+}

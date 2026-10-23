@@ -1,0 +1,19 @@
+:root {
+  --sky-top: #2b9cff;
+  --sky-bottom: #bfe6ff;
+  --ink: #12234a;
+  --white: #ffffff;
+
+  --sun: #ffd23f;
+  --coral: #ff5d5d;
+  --grass: #2fbf71;
+  --grape: #8a5cf6;
+  --sky: #4cc3ff;
+  --pink: #ff7ac8;
+
+  --tap-min: 96px;
+  --radius: 28px;
+  --gap: 20px;
+  --font-body: "Trebuchet MS", "Comic Sans MS", system-ui, sans-serif;
+  --shadow-press: 0 8px 0 rgba(18, 35, 74, 0.35);
+}

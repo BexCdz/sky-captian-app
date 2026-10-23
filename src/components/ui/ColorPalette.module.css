@@ -1,0 +1,20 @@
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.swatch {
+  width: clamp(56px, 9vmin, 84px);
+  height: clamp(56px, 9vmin, 84px);
+  border: 5px solid var(--ink);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 100ms ease;
+}
+
+.on {
+  transform: scale(1.2);
+  outline: 6px solid var(--white);
+}

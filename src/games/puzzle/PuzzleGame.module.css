@@ -1,0 +1,84 @@
+.area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5vmin;
+  --piece: min(calc(88vw / var(--cols)), calc(30vh / var(--rows)), 150px);
+}
+
+@media (orientation: landscape) {
+  .area {
+    flex-direction: row;
+    gap: 5vmin;
+    --piece: min(calc(42vw / var(--cols)), calc(62vh / var(--rows)), 150px);
+  }
+}
+
+.board,
+.tray {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--piece));
+  grid-auto-rows: var(--piece);
+  gap: 4px;
+}
+
+.board {
+  padding: 8px;
+  border: 6px solid var(--ink);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.slot {
+  width: var(--piece);
+  height: var(--piece);
+  border: 3px dashed rgba(18, 35, 74, 0.45);
+  border-radius: 12px;
+}
+
+.tray {
+  gap: 8px;
+}
+
+.piece {
+  position: relative;
+  width: var(--piece);
+  height: var(--piece);
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--white);
+  outline: 4px solid var(--ink);
+  touch-action: none;
+  cursor: grab;
+}
+
+.free {
+  transition: transform 180ms ease;
+}
+
+.dragging {
+  z-index: 5;
+  cursor: grabbing;
+  transition: none;
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.35));
+}
+
+.placed {
+  outline: none;
+  cursor: default;
+}
+
+.art {
+  position: absolute;
+  top: calc(var(--piece) * var(--row) * -1);
+  left: calc(var(--piece) * var(--col) * -1);
+  width: calc(var(--piece) * var(--cols));
+  height: calc(var(--piece) * var(--rows));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--piece) * min(var(--cols), var(--rows)) * 0.8);
+  line-height: 1;
+  pointer-events: none;
+}

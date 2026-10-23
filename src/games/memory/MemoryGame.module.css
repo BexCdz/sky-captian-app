@@ -1,0 +1,55 @@
+.grid {
+  display: grid;
+  gap: 2vmin;
+}
+
+.three { --card: min(26vmin, 190px); grid-template-columns: repeat(3, var(--card)); }
+.four { --card: min(20vmin, 160px); grid-template-columns: repeat(4, var(--card)); }
+
+.card {
+  position: relative;
+  width: var(--card);
+  height: var(--card);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 350ms ease;
+}
+
+.up .inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 6px solid var(--ink);
+  border-radius: 24px;
+  backface-visibility: hidden;
+  font-size: calc(var(--card) * 0.55);
+  box-shadow: var(--shadow-press);
+}
+
+.back {
+  background: var(--grape);
+  color: var(--white);
+}
+
+.front {
+  background: var(--white);
+  transform: rotateY(180deg);
+}
+
+.matched .front {
+  background: #c9f7dc;
+}

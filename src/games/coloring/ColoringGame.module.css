@@ -1,0 +1,23 @@
+.page {
+  flex: 1;
+  min-height: 0;
+  width: min(100%, 900px);
+  border: 6px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.region {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
