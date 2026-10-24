@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
+import FluentEmoji from '../../components/ui/FluentEmoji'
 import GameShell from '../../components/ui/GameShell'
 import WinBanner from '../../components/ui/WinBanner'
-import useSpeech from '../../hooks/useSpeech'
+import PilotPet from '../../components/pet/PilotPet'
+import { usePet } from '../../pet/usePet'
+import { playCheer } from '../../pet/sounds'
 import styles from './TicTacToe.module.css'
 
-const ME = '🐱'
-const CPU = '🐶'
+const ME = '⭐'
+const THINK_MS = 1000
 const LINES = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
   [0, 3, 6], [1, 4, 7], [2, 5, 8],
   [0, 4, 8], [2, 4, 6],
 ]
-const INTRO = 'You are the cat. Tap a square to play!'
 
 function getWinner(board) {
   for (const line of LINES) {
@@ -33,10 +35,10 @@ function findLine(board, player) {
 }
 
 // Deliberately easy: it only sometimes wins or blocks, so a 5-year-old wins often.
-function computerMove(board) {
+function computerMove(board, cpu) {
   const roll = Math.random()
   if (roll < 0.3) {
-    const win = findLine(board, CPU)
+    const win = findLine(board, cpu)
     if (win !== null) return win
   }
   if (roll < 0.5) {
@@ -48,32 +50,30 @@ function computerMove(board) {
 }
 
 export default function TicTacToe({ onHome }) {
+  const { pet } = usePet()
+  const cpu = pet.emoji
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState('me')
-  const { speak } = useSpeech()
 
   const winner = getWinner(board)
   const over = Boolean(winner) || board.every(Boolean)
 
   useEffect(() => {
-    speak(INTRO)
-  }, [speak])
-
-  useEffect(() => {
     if (turn !== 'cpu' || over) return
     const timer = setTimeout(() => {
-      setBoard((b) => b.map((v, i) => (i === computerMove(b) ? CPU : v)))
+      setBoard((b) => {
+        const pick = computerMove(b, cpu)
+        return b.map((v, i) => (i === pick ? cpu : v))
+      })
       setTurn('me')
-    }, 700)
+    }, THINK_MS)
     return () => clearTimeout(timer)
-  }, [turn, over])
+  }, [turn, over, cpu])
 
   const result = winner ? (winner.who === ME ? 'win' : 'lose') : over ? 'tie' : null
   useEffect(() => {
-    if (result === 'win') speak('You win! Great job!')
-    if (result === 'lose') speak('Good try! Let us play again!')
-    if (result === 'tie') speak('It is a tie! Well played!')
-  }, [result, speak])
+    if (result) playCheer()
+  }, [result])
 
   const play = (i) => {
     if (turn !== 'me' || over || board[i]) return
@@ -86,11 +86,16 @@ export default function TicTacToe({ onHome }) {
     setTurn('me')
   }
 
+  const thinking = turn === 'cpu' && !over
+
   return (
-    <GameShell title="❌⭕" onHome={onHome} onHint={() => speak(INTRO)}>
+    <GameShell title="❌⭕" onHome={onHome}>
       <div className={styles.layout}>
         <div className={styles.turn} aria-hidden="true">
-          {turn === 'me' ? `👉${ME}` : `${CPU}💭`}
+          <PilotPet pet={pet} size={96} bounce={thinking || result === 'lose'} />
+          <span className={styles.bubble}>
+            <FluentEmoji>{thinking ? '💭' : result ? '🎉' : `👉${ME}`}</FluentEmoji>
+          </span>
         </div>
         <div className={styles.board}>
           {board.map((value, i) => (
@@ -102,7 +107,7 @@ export default function TicTacToe({ onHome }) {
               disabled={Boolean(value) || over}
               onClick={() => play(i)}
             >
-              {value}
+              {value && <FluentEmoji>{value}</FluentEmoji>}
             </button>
           ))}
         </div>

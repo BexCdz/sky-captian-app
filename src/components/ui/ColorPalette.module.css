@@ -8,13 +8,19 @@
 .swatch {
   width: clamp(56px, 9vmin, 84px);
   height: clamp(56px, 9vmin, 84px);
-  border: 5px solid var(--ink);
+  border: 4px solid var(--white);
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 100ms ease;
+  box-shadow: 0 2px 4px rgba(30, 60, 120, 0.18), 0 8px 14px rgba(30, 60, 120, 0.14);
+  transition: transform 140ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+.swatch:active {
+  transform: scale(0.96);
 }
 
 .on {
   transform: scale(1.2);
-  outline: 6px solid var(--white);
+  outline: 5px solid var(--ink);
+  outline-offset: 2px;
 }

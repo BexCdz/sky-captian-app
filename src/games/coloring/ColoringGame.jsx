@@ -1,22 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
 import ColorPalette from '../../components/ui/ColorPalette'
 import GameShell from '../../components/ui/GameShell'
-import useSpeech from '../../hooks/useSpeech'
 import { PAGES } from './pages'
 import styles from './ColoringGame.module.css'
-
-const INTRO = 'Pick a color, then tap the picture to paint it!'
 
 export default function ColoringGame({ onHome }) {
   const [pageIndex, setPageIndex] = useState(0)
   const [color, setColor] = useState('#ff3b3b')
   const [fills, setFills] = useState({})
-  const { speak } = useSpeech()
-
-  useEffect(() => {
-    speak(INTRO)
-  }, [speak])
 
   const page = PAGES[pageIndex]
   const pageFills = fills[page.id] ?? {}
@@ -27,7 +19,7 @@ export default function ColoringGame({ onHome }) {
   const go = (step) => setPageIndex((i) => (i + step + PAGES.length) % PAGES.length)
 
   return (
-    <GameShell title="🖍️" onHome={onHome} onHint={() => speak(INTRO)}>
+    <GameShell title="🖍️" onHome={onHome}>
       <svg className={styles.page} viewBox="0 0 200 200" role="img" aria-label="Coloring page">
         {page.regions.map(({ id, shape: Shape, props }) => (
           <Shape

@@ -1,0 +1,84 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: clamp(8px, 2vmin, 18px);
+  --cell: clamp(64px, calc((100vh - 270px) / 3), min(28vmin, 190px));
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-head);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px var(--edge), var(--shadow-card);
+  transition: transform 140ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 140ms ease, filter 200ms ease;
+}
+
+.cell:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 0 4px var(--edge), var(--shadow-card-down);
+}
+
+.sun { --edge: var(--sun-edge); background: linear-gradient(160deg, var(--sun-a), var(--sun-b)); }
+.grass { --edge: var(--grass-edge); background: linear-gradient(160deg, var(--grass-a), var(--grass-b)); }
+.coral { --edge: var(--coral-edge); background: linear-gradient(160deg, var(--coral-a), var(--coral-b)); }
+.grape { --edge: var(--grape-edge); background: linear-gradient(160deg, var(--grape-a), var(--grape-b)); }
+.sky { --edge: var(--sky-edge); background: linear-gradient(160deg, var(--sky-a), var(--sky-b)); }
+.pink { --edge: var(--pink-edge); background: linear-gradient(160deg, var(--pink-a), var(--pink-b)); }
+
+.emoji {
+  font-size: calc(var(--cell) * 0.46);
+  line-height: 1;
+}
+
+.name {
+  font-size: clamp(0.8rem, calc(var(--cell) * 0.14), 1.4rem);
+  line-height: 1.05;
+}
+
+.got {
+  filter: saturate(0.8) brightness(1.04);
+}
+
+.stamp {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: calc(var(--cell) * 0.34);
+  line-height: 1;
+  animation: stamp 420ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.pop {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 0.9em;
+  animation: rise 1s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes stamp {
+  0% { transform: scale(0.2) rotate(-30deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+@keyframes rise {
+  0% { transform: translateY(0) scale(0.6); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.2); opacity: 0; }
+}
+
+@media (max-height: 520px) {
+  .name { display: none; }
+  .emoji { font-size: calc(var(--cell) * 0.6); }
+}

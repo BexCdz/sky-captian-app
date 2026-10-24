@@ -1,3 +1,4 @@
+import FluentEmoji from './FluentEmoji'
 import styles from './BigButton.module.css'
 
 export default function BigButton({
@@ -20,7 +21,7 @@ export default function BigButton({
     >
       {emoji && (
         <span className={styles.emoji} aria-hidden="true">
-          {emoji}
+          <FluentEmoji>{emoji}</FluentEmoji>
         </span>
       )}
       {label && <span>{label}</span>}

@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
+import FluentEmoji from '../../components/ui/FluentEmoji'
 import GameShell from '../../components/ui/GameShell'
 import WinBanner from '../../components/ui/WinBanner'
-import useSpeech from '../../hooks/useSpeech'
 import { shuffle } from '../../utils/shuffle'
 import styles from './PuzzleGame.module.css'
 
@@ -12,7 +12,6 @@ const LEVELS = [
   { cols: 3, rows: 2 },
   { cols: 3, rows: 3 },
 ]
-const INTRO = 'Drag each piece to its place to finish the picture!'
 
 function setup(level) {
   const { cols, rows } = LEVELS[level]
@@ -28,7 +27,7 @@ function PieceArt({ emoji, cols, rows, index }) {
       className={styles.art}
       style={{ '--cols': cols, '--rows': rows, '--col': index % cols, '--row': Math.floor(index / cols) }}
     >
-      {emoji}
+      <FluentEmoji>{emoji}</FluentEmoji>
     </span>
   )
 }
@@ -74,17 +73,10 @@ export default function PuzzleGame({ onHome }) {
   const [puzzle, setPuzzle] = useState(() => setup(0))
   const [placed, setPlaced] = useState([])
   const slots = useRef([])
-  const { speak } = useSpeech()
 
   const { cols, rows } = LEVELS[level]
   const done = placed.length === cols * rows
 
-  useEffect(() => {
-    speak(INTRO)
-  }, [speak])
-  useEffect(() => {
-    if (done) speak('You did it! Great job!')
-  }, [done, speak])
 
   const drop = (index, cx, cy) => {
     const rect = slots.current[index]?.getBoundingClientRect()
@@ -102,7 +94,7 @@ export default function PuzzleGame({ onHome }) {
   }
 
   return (
-    <GameShell title="🧩" onHome={onHome} onHint={() => speak(INTRO)}>
+    <GameShell title="🧩" onHome={onHome}>
       <div className={styles.area} style={{ '--cols': cols, '--rows': rows }}>
         <div className={styles.board}>
           {Array.from({ length: cols * rows }, (_, i) => (

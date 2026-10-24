@@ -2,12 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
 import ColorPalette from '../../components/ui/ColorPalette'
 import GameShell from '../../components/ui/GameShell'
-import useSpeech from '../../hooks/useSpeech'
 import styles from './DrawingGame.module.css'
 
 const SIZES = [8, 20, 40]
 const WHITE = '#ffffff'
-const INTRO = 'Let us draw! Pick a color, then draw with your finger.'
 
 // Strokes keep normalized (0-1) points so a drawing survives a resize or rotation.
 function drawStroke(ctx, stroke, w, h, from = 0) {
@@ -52,7 +50,6 @@ export default function DrawingGame({ onHome }) {
   const [color, setColor] = useState('#ff3b3b')
   const [brush, setBrush] = useState(SIZES[1])
   const [canUndo, setCanUndo] = useState(false)
-  const { speak } = useSpeech()
 
   const redraw = useCallback(() => {
     const { w, h } = size.current
@@ -73,10 +70,6 @@ export default function DrawingGame({ onHome }) {
     observer.observe(wrapRef.current)
     return () => observer.disconnect()
   }, [redraw])
-
-  useEffect(() => {
-    speak(INTRO)
-  }, [speak])
 
   const point = (e) => {
     const r = canvasRef.current.getBoundingClientRect()
@@ -122,7 +115,7 @@ export default function DrawingGame({ onHome }) {
   }
 
   return (
-    <GameShell title="🎨" onHome={onHome} onHint={() => speak(INTRO)}>
+    <GameShell title="🎨" onHome={onHome}>
       <div ref={wrapRef} className={styles.canvasWrap}>
         <canvas
           ref={canvasRef}

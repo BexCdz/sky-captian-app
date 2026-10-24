@@ -1,0 +1,40 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 2.5vmin;
+  width: min(100%, 900px);
+  padding: 8px 8px 90px;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  padding: 14px;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 140ms ease;
+}
+
+.tile:active {
+  transform: scale(0.96);
+  box-shadow: var(--shadow-card-down);
+}
+
+.tile:focus-visible {
+  outline: 6px solid var(--white);
+  outline-offset: 4px;
+}
+
+.sun { background: linear-gradient(160deg, var(--sun-a), var(--sun-b)); }
+.grass { background: linear-gradient(160deg, var(--grass-a), var(--grass-b)); }
+.coral { background: linear-gradient(160deg, var(--coral-a), var(--coral-b)); }
+.grape { background: linear-gradient(160deg, var(--grape-a), var(--grape-b)); }
+.sky { background: linear-gradient(160deg, var(--sky-a), var(--sky-b)); }
+.pink { background: linear-gradient(160deg, var(--pink-a), var(--pink-b)); }
+
+@media (max-height: 520px) {
+  .tile { min-height: 110px; padding: 8px; }
+}

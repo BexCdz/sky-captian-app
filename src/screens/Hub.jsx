@@ -1,31 +1,27 @@
-import { useEffect } from 'react'
 import BigButton from '../components/ui/BigButton'
 import GameShell from '../components/ui/GameShell'
-import useSpeech from '../hooks/useSpeech'
+import { usePet } from '../pet/usePet'
 import styles from './Hub.module.css'
 
-const INTRO = 'Pick a game!'
-
 export default function Hub({ games, onPick }) {
-  const { speak } = useSpeech()
-
-  useEffect(() => {
-    speak(INTRO)
-  }, [speak])
+  const { pet } = usePet()
 
   return (
-    <GameShell title="✈️ Sky Captain" scroll onHint={() => speak(INTRO)}>
+    <GameShell title="Sky Captain" emblem scroll>
       <div className={styles.grid}>
-        {games.map((game) => (
-          <BigButton
-            key={game.id}
-            size="tile"
-            emoji={game.emoji}
-            label={game.label}
-            color={game.color}
-            onClick={() => onPick(game.id)}
-          />
-        ))}
+        {games.map((game) => {
+          const { emoji, label } = game.tile?.(pet) ?? game
+          return (
+            <BigButton
+              key={game.id}
+              size="tile"
+              emoji={emoji}
+              label={label}
+              color={game.color}
+              onClick={() => onPick(game.id)}
+            />
+          )
+        })}
       </div>
     </GameShell>
   )

@@ -1,0 +1,13 @@
+/* The screen holds the flight tracker strip on top and the active view below it. */
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.view {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}

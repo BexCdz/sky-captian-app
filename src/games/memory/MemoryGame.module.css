@@ -33,23 +33,22 @@
   inset: 0;
   display: grid;
   place-items: center;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: 24px;
   backface-visibility: hidden;
   font-size: calc(var(--card) * 0.55);
-  box-shadow: var(--shadow-press);
+  box-shadow: var(--shadow-card);
 }
 
 .back {
-  background: var(--grape);
-  color: var(--white);
+  background: linear-gradient(160deg, var(--grape-a), var(--grape-b));
 }
 
 .front {
-  background: var(--white);
+  background: linear-gradient(160deg, #ffffff, #f1f6ff);
   transform: rotateY(180deg);
 }
 
 .matched .front {
-  background: #c9f7dc;
+  background: linear-gradient(160deg, var(--grass-a), var(--grass-b));
 }

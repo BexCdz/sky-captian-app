@@ -11,9 +11,10 @@
   gap: 1vmin;
   max-width: min(100%, 900px);
   padding: 3vmin;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--white);
+  background: linear-gradient(160deg, #ffffff, #eef5ff);
+  box-shadow: var(--shadow-card);
   font-size: clamp(3rem, 12vmin, 6rem);
   line-height: 1.1;
 }

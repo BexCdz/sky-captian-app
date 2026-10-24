@@ -1,9 +1,22 @@
+import { useEffect, useRef } from 'react'
+import { usePet } from '../../pet/usePet'
 import EmojiHero from './EmojiHero'
+import FluentEmoji from './FluentEmoji'
 import styles from './WinBanner.module.css'
 
 const BITS = ['🎉', '⭐', '✨', '🎈', '🌟', '🎊']
 
 export default function WinBanner({ emoji = '🎉', children }) {
+  const { addStars } = usePet()
+
+  // Each finished round earns one Flight Star to spend on the Co-Pilot.
+  const awarded = useRef(false)
+  useEffect(() => {
+    if (awarded.current) return
+    awarded.current = true
+    addStars(1)
+  }, [addStars])
+
   return (
     <div className={styles.overlay} role="dialog" aria-label="Well done">
       {Array.from({ length: 14 }, (_, i) => (
@@ -17,7 +30,7 @@ export default function WinBanner({ emoji = '🎉', children }) {
           }}
           aria-hidden="true"
         >
-          {BITS[i % BITS.length]}
+          <FluentEmoji>{BITS[i % BITS.length]}</FluentEmoji>
         </span>
       ))}
       <div className={styles.card}>

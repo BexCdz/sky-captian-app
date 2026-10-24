@@ -1,19 +1,54 @@
 :root {
-  --sky-top: #2b9cff;
-  --sky-bottom: #bfe6ff;
-  --ink: #12234a;
-  --white: #ffffff;
+  --sky-top: #aecbe0;
+  --sky-bottom: #f4e8cf;
+  --ink: #4a3626;
+  --white: #fffaf0;
+  --cream-a: #fdf8ec;
+  --cream-b: #efe2c6;
+  --brass-a: #f0d896;
+  --brass-b: #c79a4e;
+  --brass-c: #8f6430;
 
-  --sun: #ffd23f;
-  --coral: #ff5d5d;
-  --grass: #2fbf71;
-  --grape: #8a5cf6;
-  --sky: #4cc3ff;
-  --pink: #ff7ac8;
+  --sun: #f0c95a;
+  --coral: #e08a5e;
+  --grass: #8fbf78;
+  --grape: #a994c9;
+  --sky: #8ab4d4;
+  --pink: #e3a79d;
 
   --tap-min: 96px;
   --radius: 28px;
   --gap: 20px;
   --font-body: "Trebuchet MS", "Comic Sans MS", system-ui, sans-serif;
-  --shadow-press: 0 8px 0 rgba(18, 35, 74, 0.35);
+  --font-head: "Fredoka Variable", "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+
+  /* muted vintage card fills: [light, deep] */
+  --sun-a: #fbefc0;    --sun-b: #f0d27c;    --sun-edge: #d9b552;
+  --coral-a: #f8dcc4;  --coral-b: #eeab80;  --coral-edge: #d88a5c;
+  --grass-a: #e2edd2;  --grass-b: #b4d49a;  --grass-edge: #8fb878;
+  --grape-a: #ebe3f2;  --grape-b: #cdbfe0;  --grape-edge: #ac98c8;
+  --sky-a: #e1edf5;    --sky-b: #b0cde4;    --sky-edge: #86abc8;
+  --pink-a: #f7e2dc;   --pink-b: #e8b9b0;   --pink-edge: #d3948a;
+
+  /* painted sky with soft clouds, shared by the page and every screen */
+  --scene:
+    radial-gradient(ellipse 22% 9% at 12% 18%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(ellipse 26% 10% at 78% 12%, rgba(255, 255, 255, 0.8), transparent 70%),
+    radial-gradient(ellipse 30% 11% at 90% 62%, rgba(255, 255, 255, 0.75), transparent 70%),
+    radial-gradient(ellipse 28% 10% at 8% 80%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(ellipse 24% 8% at 48% 94%, rgba(255, 255, 255, 0.8), transparent 70%),
+    linear-gradient(var(--sky-top), var(--sky-bottom));
+
+  /* organic, multi-layered depth, warmed to match parchment */
+  --shadow-card:
+    0 1px 2px rgba(110, 80, 40, 0.14),
+    0 4px 8px rgba(110, 80, 40, 0.12),
+    0 12px 24px rgba(110, 80, 40, 0.14),
+    0 24px 40px rgba(110, 80, 40, 0.10),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -4px 10px rgba(255, 255, 255, 0.35);
+  --shadow-card-down:
+    0 1px 2px rgba(110, 80, 40, 0.18),
+    0 3px 6px rgba(110, 80, 40, 0.14),
+    inset 0 3px 8px rgba(110, 80, 40, 0.14);
 }

@@ -4,14 +4,14 @@
   align-items: center;
   justify-content: center;
   gap: 2.5vmin;
-  --piece: min(calc(88vw / var(--cols)), calc(30vh / var(--rows)), 150px);
+  --piece: min(calc(80vw / var(--cols)), calc(26vh / var(--rows)), 150px);
 }
 
 @media (orientation: landscape) {
   .area {
     flex-direction: row;
     gap: 5vmin;
-    --piece: min(calc(42vw / var(--cols)), calc(62vh / var(--rows)), 150px);
+    --piece: min(calc(40vw / var(--cols)), calc(52vh / var(--rows)), 150px);
   }
 }
 
@@ -25,9 +25,10 @@
 
 .board {
   padding: 8px;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-card);
 }
 
 .slot {
@@ -46,9 +47,9 @@
   width: var(--piece);
   height: var(--piece);
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--white);
-  outline: 4px solid var(--ink);
+  box-shadow: 0 2px 4px rgba(30, 60, 120, 0.18), 0 8px 14px rgba(30, 60, 120, 0.14);
   touch-action: none;
   cursor: grab;
 }

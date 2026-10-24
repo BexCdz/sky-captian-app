@@ -14,7 +14,7 @@ body,
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: linear-gradient(var(--sky-top), var(--sky-bottom));
+  background: var(--scene);
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;

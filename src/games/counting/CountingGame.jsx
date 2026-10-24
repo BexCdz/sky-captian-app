@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
+import FluentEmoji from '../../components/ui/FluentEmoji'
 import GameShell from '../../components/ui/GameShell'
-import useSpeech from '../../hooks/useSpeech'
-import { randomPraise } from '../../utils/praise'
 import { shuffle } from '../../utils/shuffle'
 import styles from './CountingGame.module.css'
 
@@ -55,19 +54,14 @@ export default function CountingGame({ onHome }) {
   const [solved, setSolved] = useState(false)
   const [stars, setStars] = useState(0)
   const timer = useRef(null)
-  const { speak } = useSpeech()
 
   useEffect(() => () => clearTimeout(timer.current), [])
-  useEffect(() => {
-    speak(round.prompt)
-  }, [speak, round])
 
   const answer = (value) => {
     if (solved) return
     if (value === round.answer) {
       setSolved(true)
       setStars((s) => s + 1)
-      speak(randomPraise())
       timer.current = setTimeout(() => {
         const next = roundNumber + 1
         setRoundNumber(next)
@@ -77,24 +71,23 @@ export default function CountingGame({ onHome }) {
       }, 1600)
     } else {
       setWrong((w) => [...w, value])
-      speak('Try again!')
     }
   }
 
   return (
-    <GameShell title="🔢" onHome={onHome} onHint={() => speak(round.prompt)}>
+    <GameShell title="🔢" onHome={onHome}>
       <div className={styles.stars} aria-label={`${stars} stars`}>
-        ⭐ {stars}
+        <FluentEmoji>⭐</FluentEmoji> {stars}
       </div>
       {round.kind === 'count' ? (
         <div className={styles.things} aria-label={round.prompt}>
           {Array.from({ length: round.answer }, (_, i) => (
-            <span key={i}>{round.thing.e}</span>
+            <span key={i}><FluentEmoji>{round.thing.e}</FluentEmoji></span>
           ))}
         </div>
       ) : (
         <div className={styles.question} aria-hidden="true">
-          ❓
+          <FluentEmoji>❓</FluentEmoji>
         </div>
       )}
       <div className={styles.options}>

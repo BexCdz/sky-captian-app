@@ -1,0 +1,9 @@
+.img {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.12em;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0.04em 0.05em rgba(40, 60, 110, 0.28));
+}

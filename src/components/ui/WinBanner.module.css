@@ -1,11 +1,11 @@
 .overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(18, 35, 74, 0.55);
+  background: rgba(70, 50, 30, 0.55);
   overflow: hidden;
 }
 
@@ -17,9 +17,10 @@
   align-items: center;
   gap: 3vmin;
   padding: 4vmin 6vmin;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--white);
+  background: linear-gradient(160deg, #ffffff, #eef5ff);
+  box-shadow: var(--shadow-card);
 }
 
 .actions {

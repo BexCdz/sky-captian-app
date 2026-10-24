@@ -2,9 +2,10 @@
   flex: 1;
   min-height: 0;
   width: min(100%, 900px);
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--white);
+  background: linear-gradient(160deg, #ffffff, #f3f7ff);
+  box-shadow: var(--shadow-card);
 }
 
 .region {

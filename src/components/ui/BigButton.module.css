@@ -7,20 +7,19 @@
   min-width: var(--tap-min);
   min-height: var(--tap-min);
   padding: 16px 32px;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
   color: var(--ink);
-  font: inherit;
+  font-family: var(--font-head);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: var(--shadow-press);
-  transition: transform 80ms ease, box-shadow 80ms ease;
+  box-shadow: 0 0 0 4px var(--edge, transparent), var(--shadow-card);
 }
 
 .button:active:not(:disabled) {
-  transform: translateY(6px);
-  box-shadow: 0 2px 0 rgba(18, 35, 74, 0.35);
+  transform: scale(0.96);
+  box-shadow: 0 0 0 4px var(--edge, transparent), var(--shadow-card-down);
 }
 
 .button:focus-visible {
@@ -38,12 +37,37 @@
   line-height: 1;
 }
 
-.sun { background: var(--sun); }
-.grass { background: var(--grass); }
-.coral { background: var(--coral); }
-.grape { background: var(--grape); color: var(--white); }
-.sky { background: var(--sky); }
-.pink { background: var(--pink); }
+.sun { --edge: var(--sun-edge); background: linear-gradient(160deg, var(--sun-a), var(--sun-b)); }
+.grass { --edge: var(--grass-edge); background: linear-gradient(160deg, var(--grass-a), var(--grass-b)); }
+.coral { --edge: var(--coral-edge); background: linear-gradient(160deg, var(--coral-a), var(--coral-b)); }
+.grape { --edge: var(--grape-edge); background: linear-gradient(160deg, var(--grape-a), var(--grape-b)); }
+.sky { --edge: var(--sky-edge); background: linear-gradient(160deg, var(--sky-a), var(--sky-b)); }
+.pink { --edge: var(--pink-edge); background: linear-gradient(160deg, var(--pink-a), var(--pink-b)); }
+
+/* Brass rivets in the top corners, like a riveted metal plate. */
+.button {
+  position: relative;
+}
+
+.button::before,
+.button::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff3cf, #c9a15a 55%, #8a6a3a);
+  box-shadow: 0 1px 1px rgba(80, 50, 15, 0.5);
+}
+
+.button::before { left: 12px; }
+.button::after { right: 12px; }
+
+.compact::before,
+.compact::after {
+  display: none;
+}
 
 .compact {
   min-height: var(--tap-min);

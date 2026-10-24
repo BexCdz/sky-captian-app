@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import BigButton from '../../components/ui/BigButton'
+import FluentEmoji from '../../components/ui/FluentEmoji'
 import GameShell from '../../components/ui/GameShell'
 import WinBanner from '../../components/ui/WinBanner'
-import useSpeech from '../../hooks/useSpeech'
 import { shuffle } from '../../utils/shuffle'
 import styles from './MemoryGame.module.css'
 
 const ANIMALS = ['🐶', '🐱', '🐵', '🦁', '🐸', '🐙', '🦄', '🐢', '🐼', '🐰', '🦋', '🐠']
 const LEVELS = [3, 4, 6]
-const INTRO = 'Find the matching pairs!'
 
 function deal(pairs) {
   const picks = shuffle(ANIMALS).slice(0, pairs)
@@ -21,17 +20,10 @@ export default function MemoryGame({ onHome }) {
   const [open, setOpen] = useState([])
   const [matched, setMatched] = useState([])
   const timer = useRef(null)
-  const { speak } = useSpeech()
 
   const won = matched.length === cards.length
 
   useEffect(() => () => clearTimeout(timer.current), [])
-  useEffect(() => {
-    speak(INTRO)
-  }, [speak])
-  useEffect(() => {
-    if (won) speak('You found them all! Great job!')
-  }, [won, speak])
 
   const flip = (id) => {
     if (open.length === 2 || open.includes(id) || matched.includes(id)) return
@@ -58,7 +50,7 @@ export default function MemoryGame({ onHome }) {
   }
 
   return (
-    <GameShell title="🧠" onHome={onHome} onHint={() => speak(INTRO)}>
+    <GameShell title="🧠" onHome={onHome}>
       <div className={`${styles.grid} ${LEVELS[level] === 3 ? styles.three : styles.four}`}>
         {cards.map((card) => {
           const isMatched = matched.includes(card.id)
@@ -72,8 +64,8 @@ export default function MemoryGame({ onHome }) {
               onClick={() => flip(card.id)}
             >
               <span className={styles.inner}>
-                <span className={`${styles.face} ${styles.back}`}>❓</span>
-                <span className={`${styles.face} ${styles.front}`}>{card.emoji}</span>
+                <span className={`${styles.face} ${styles.back}`}><FluentEmoji>❓</FluentEmoji></span>
+                <span className={`${styles.face} ${styles.front}`}><FluentEmoji>{card.emoji}</FluentEmoji></span>
               </span>
             </button>
           )

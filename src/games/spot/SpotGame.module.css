@@ -4,13 +4,13 @@
   align-items: center;
   justify-content: center;
   gap: 2.5vmin;
-  --cell: min(20vmin, 11vh);
+  --cell: min(20vmin, 10vh);
 }
 
 @media (orientation: landscape) {
   .panels {
     flex-direction: row;
-    --cell: min(11vw, 17vh);
+    --cell: min(11vw, 14vh);
   }
 }
 
@@ -19,9 +19,10 @@
   grid-template-columns: repeat(4, var(--cell));
   gap: 6px;
   padding: 10px;
-  border: 6px solid var(--ink);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--white);
+  background: linear-gradient(160deg, #ffffff, #eef5ff);
+  box-shadow: var(--shadow-card);
 }
 
 .cell {
